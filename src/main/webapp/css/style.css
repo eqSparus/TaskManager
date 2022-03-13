@@ -1,0 +1,18 @@
+body{
+    font-family: 'Roboto','Roboto Light', sans-serif !important;
+}
+
+.form_container {
+    max-width: 400px;
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+}
+
+.btn_w{
+    width: 100%;
+}
+
+.back{
+    background: #8FC4B7;
+}
