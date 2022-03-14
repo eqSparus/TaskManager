@@ -12,52 +12,46 @@ import java.io.Reader;
  */
 public class ParserJsonService {
 
-    private final ObjectMapper mapper;
+    private ParserJsonService() {
 
-    public ParserJsonService() {
-        mapper = new ObjectMapper();
     }
 
     /**
      * Метод для сериализации данных в JSON.
      * @param object класс для сериализции.
      * @return JSON строка.
-     * @throws JsonProcessingException
      */
-    public <T> String toJson(T object) throws JsonProcessingException {
-        return mapper.writeValueAsString(object);
+    public static <T> String toJson(T object) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(object);
     }
 
     /**
      * Метод для преобразования строки JSON в оъект.
-     * @param json строка.
+     * @param json  строка.
      * @param clazz класс парсинга.
      * @return возвращает объект JSON.
-     * @throws JsonProcessingException
      */
-    public <T> T toObject(String json, Class<T> clazz) throws JsonProcessingException {
-        return mapper.readValue(json, clazz);
+    public static <T> T toObject(String json, Class<T> clazz) throws JsonProcessingException {
+        return new ObjectMapper().readValue(json, clazz);
     }
 
     /**
      * Метод для преобразования потока символов в оъект.
      * @param reader поток символов.
-     * @param clazz класс парсинга.
+     * @param clazz  класс парсинга.
      * @return возвращает объект JSON.
-     * @throws JsonProcessingException
      */
-    public <T> T toObject(Reader reader, Class<T> clazz) throws IOException {
-        return mapper.readValue(reader, clazz);
+    public static <T> T toObject(Reader reader, Class<T> clazz) throws IOException {
+        return new ObjectMapper().readValue(reader, clazz);
     }
 
     /**
      * Метод для преобразования потока байтов в оъект.
      * @param stream поток байтов.
-     * @param clazz класс парсинга.
+     * @param clazz  класс парсинга.
      * @return возвращает объект JSON.
-     * @throws JsonProcessingException
      */
-    public <T> T toObject(InputStream stream, Class<T> clazz) throws IOException {
-        return mapper.readValue(stream, clazz);
+    public static <T> T toObject(InputStream stream, Class<T> clazz) throws IOException {
+        return new ObjectMapper().readValue(stream, clazz);
     }
 }

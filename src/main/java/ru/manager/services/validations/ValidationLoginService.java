@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Проверка логина пользователя.
  */
-public class ValidationLoginService implements Validation<String> {
+public class ValidationLoginService implements IValidation<String> {
 
     private static final Pattern regLogin = Pattern.compile("\\w{1,50}");
 

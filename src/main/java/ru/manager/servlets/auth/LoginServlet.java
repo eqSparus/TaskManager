@@ -1,7 +1,7 @@
 package ru.manager.servlets.auth;
 
 import ru.manager.models.dto.UserDto;
-import ru.manager.services.auth.AuthService;
+import ru.manager.services.auth.IAuthService;
 import ru.manager.services.auth.AuthUserService;
 import ru.manager.services.json.ParserJsonService;
 
@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Сервлет для входа пользователя.
@@ -19,7 +21,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/login", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private AuthService authService;
+    private IAuthService authService;
 
     @Override
     public void init() throws ServletException {
@@ -47,28 +49,29 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Map<String, String> resp = new HashMap<>();
+
         response.setContentType("application/json");
-        var parser = new ParserJsonService();
 
         try (var reader = request.getReader();
              var responseWriter = response.getWriter()) {
 
-            var user = parser.toObject(reader, UserDto.class);
+            var user = ParserJsonService.toObject(reader, UserDto.class);
 
-            var resp = authService.authorizationUser(user);
-
-            if (resp.containsKey("html")) {
+            if (authService.authorizationUser(user)) {
                 var value = String.format("%s:%s", user.getLogin(), user.getPassword());
 
                 var cookie = new Cookie("user", value);
                 cookie.setHttpOnly(true);
                 response.addCookie(cookie);
                 response.setStatus(HttpServletResponse.SC_OK);
+                resp.put("html", "http://localhost:8080/main");
             } else {
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
+                resp.put("message", "Incorrect login or password!");
             }
 
-            responseWriter.write(parser.toJson(resp));
+            responseWriter.write(ParserJsonService.toJson(resp));
         }
 
     }

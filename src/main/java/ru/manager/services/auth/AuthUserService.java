@@ -1,25 +1,23 @@
 package ru.manager.services.auth;
 
-import ru.manager.dao.UserDao;
+import ru.manager.dao.IUserDao;
 import ru.manager.dao.UserDaoImpl;
 import ru.manager.models.User;
 import ru.manager.models.dto.UserDto;
 import ru.manager.services.crypt.SecurityService;
-import ru.manager.services.validations.Validation;
+import ru.manager.services.validations.IValidation;
 import ru.manager.services.validations.ValidationLoginService;
 import ru.manager.services.validations.ValidationPasswordService;
-
-import java.util.Map;
 
 /**
  * Сервис для регистрации и авторизации пользователя.
  */
-public class AuthUserService implements AuthService {
+public class AuthUserService implements IAuthService {
 
-    private final UserDao dao;
+    private final IUserDao dao;
     private final SecurityService security;
-    private final Validation<String> validPass;
-    private final Validation<String> validLogin;
+    private final IValidation<String> validPass;
+    private final IValidation<String> validLogin;
 
     public AuthUserService() {
         this.dao = new UserDaoImpl();
@@ -31,13 +29,14 @@ public class AuthUserService implements AuthService {
     /**
      * Метод для проверки данных пользователя и его регистрации.
      * @param dto данные пользователя.
-     * @return ответа сервера.
+     * @return true если пользователь добавлен, false если пользователь
+     * не прошел проверку
      */
     @Override
-    public Map<String, String> registrationUser(UserDto dto) {
+    public boolean registrationUser(UserDto dto) {
 
         if (!validLogin.isValid(dto.getLogin()) && !validPass.isValid(dto.getPassword())) {
-            return Map.of("message", "Wrong data entered!");
+            return false;
         }
 
         var user = dao.findUserByUsername(dto.getLogin());
@@ -45,25 +44,21 @@ public class AuthUserService implements AuthService {
         if (user.isEmpty()) {
             var newUser = new User(dto.getLogin(), security.encrypt(dto.getPassword()));
             dao.createUser(newUser);
-            return Map.of("html", "http://localhost:8080/login");
+            return true;
         }
-        return Map.of("message", "This user already exists!");
+        return false;
     }
 
     /**
      * Метод для авторизации пользователя и ответа сервера.
      * @param dto данные пользователя.
-     * @return ответа сервера.
+     * @return true если пользователь авторизован, false если
+     * пользователь не авторизован
      */
     @Override
-    public Map<String, String> authorizationUser(UserDto dto) {
-
+    public boolean authorizationUser(UserDto dto) {
         var user = dao.findUserByUsername(dto.getLogin());
-
-        if (user.isPresent() && security.isMatchPassword(dto.getPassword(), user.get().getPassword())) {
-            return Map.of("html", "http://localhost:8080/main");
-        }
-        return Map.of("message", "Incorrect login or password!");
+        return user.isPresent() && security.isMatchPassword(dto.getPassword(), user.get().getPassword());
     }
 
 }

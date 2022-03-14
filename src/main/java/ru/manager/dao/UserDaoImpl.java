@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * Класс для взаимодействия с таблицей users в БД.
  */
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements IUserDao {
 
     private static final String SQL_CREATE_USER
             = "INSERT INTO users(username, password) VALUES (?, ?)";

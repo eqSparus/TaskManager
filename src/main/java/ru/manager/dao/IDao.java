@@ -1,6 +1,6 @@
 package ru.manager.dao;
 
-public interface Dao<T> {
+public interface IDao<T> {
 
     T create(T t);
 

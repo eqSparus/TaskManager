@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * Проверка пароля пользователя.
  */
-public class ValidationPasswordService implements Validation<String> {
+public class ValidationPasswordService implements IValidation<String> {
 
     private static final Pattern regPassword = Pattern.compile("[a-zA-Z0-9]{8,50}");
 

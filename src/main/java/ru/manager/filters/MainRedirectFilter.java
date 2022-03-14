@@ -1,6 +1,6 @@
 package ru.manager.filters;
 
-import ru.manager.dao.UserDao;
+import ru.manager.dao.IUserDao;
 import ru.manager.dao.UserDaoImpl;
 import ru.manager.services.crypt.SecurityService;
 
@@ -18,7 +18,7 @@ import java.util.Arrays;
 @WebFilter(urlPatterns = "/main")
 public class MainRedirectFilter implements Filter {
 
-    private UserDao dao;
+    private IUserDao dao;
     private SecurityService securityService;
 
     @Override
