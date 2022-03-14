@@ -12,7 +12,7 @@ document.querySelector('#btn_reg').onclick = (e) => {
     if (password.toString().match(regPass) && login.toString().match(regLogin)) {
 
         if (password === repeatPassword) {
-            fetch("reg", {
+            fetch("registration", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

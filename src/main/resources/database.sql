@@ -9,12 +9,12 @@ CREATE TABLE users
 
 CREATE TABLE tasks
 (
-    task_id        BIGSERIAL PRIMARY KEY,
-    title          VARCHAR(50) NOT NULL,
-    description    TEXT        NOT NULL,
-    created_at     DATE        NOT NULL,
-    update_at      DATE        NOT NULL,
-    completion_day INTEGER     NOT NULL,
-    status         VARCHAR(20) NOT NULL,
-    fk_user        BIGSERIAL REFERENCES users (user_id)
+    task_id       BIGSERIAL PRIMARY KEY,
+    title         VARCHAR(50) NOT NULL,
+    description   TEXT        NOT NULL,
+    created_at    DATE        NOT NULL,
+    completion_at DATE        NOT NULL,
+    frozen_day    DATE,
+    status        VARCHAR(20) NOT NULL,
+    fk_user       BIGSERIAL REFERENCES users (user_id)
 );

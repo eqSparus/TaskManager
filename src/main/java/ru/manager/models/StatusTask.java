@@ -5,5 +5,5 @@ package ru.manager.models;
  */
 public enum StatusTask {
 
-    ACTIVE, FROZEN, FAILED
+    ACTIVE, FROZEN, FAILED, DONE
 }

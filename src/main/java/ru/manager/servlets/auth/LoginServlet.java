@@ -1,8 +1,8 @@
 package ru.manager.servlets.auth;
 
 import ru.manager.models.dto.UserDto;
-import ru.manager.services.auth.IAuthService;
 import ru.manager.services.auth.AuthUserService;
+import ru.manager.services.auth.IAuthService;
 import ru.manager.services.json.ParserJsonService;
 
 import javax.servlet.ServletException;
@@ -71,8 +71,10 @@ public class LoginServlet extends HttpServlet {
                 resp.put("message", "Incorrect login or password!");
             }
 
+
             responseWriter.write(ParserJsonService.toJson(resp));
         }
 
     }
+
 }

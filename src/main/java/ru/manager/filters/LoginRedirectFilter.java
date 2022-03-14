@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Фильтр для запрета посещения авторизованых пользователей.
  * на страницы регистрации и авторизации.
  */
-@WebFilter(urlPatterns = {"/reg", "/login"})
+@WebFilter(urlPatterns = {"/registration", "/login"})
 public class LoginRedirectFilter implements Filter {
 
     @Override
@@ -24,7 +24,6 @@ public class LoginRedirectFilter implements Filter {
         var cookie = Arrays.stream(request.getCookies())
                 .filter(c -> "user".equals(c.getName()))
                 .findAny();
-
 
         if (cookie.isPresent()) {
             response.sendRedirect("main");

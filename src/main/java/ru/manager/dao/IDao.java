@@ -1,12 +1,15 @@
 package ru.manager.dao;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface IDao<T> {
 
-    T create(T t);
+    Optional<T> create(T t);
 
     void delete(Long id);
 
-    T update(T t, Long id);
+    Optional<T> update(T t, Long id);
 
-    T findAll();
+    List<T> findAll();
 }

@@ -1,5 +1,10 @@
-body{
-    font-family: 'Roboto','Roboto Light', sans-serif !important;
+html{
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Roboto', 'Roboto Light', sans-serif !important;
 }
 
 .form_container {
@@ -9,10 +14,27 @@ body{
     margin: auto;
 }
 
-.btn_w{
+.btn_w {
     width: 100%;
 }
 
-.back{
+.back {
     background: #8FC4B7;
+}
+
+.main_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 85% 15%;
+    height: 100vh;
+}
+
+.field{
+    height: 78vh;
+}
+
+.btn_center{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    justify-self: center;
 }

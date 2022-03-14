@@ -1,8 +1,8 @@
 package ru.manager.servlets.auth;
 
 import ru.manager.models.dto.UserDto;
-import ru.manager.services.auth.IAuthService;
 import ru.manager.services.auth.AuthUserService;
+import ru.manager.services.auth.IAuthService;
 import ru.manager.services.json.ParserJsonService;
 
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Сервлет для регистрации пользователя.
  */
-@WebServlet(name = "RegistrationServlet", urlPatterns = "/reg")
+@WebServlet(urlPatterns = "/registration", name = "RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
 
     private IAuthService service;
