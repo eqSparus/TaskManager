@@ -48,7 +48,7 @@ public class UserDaoImpl implements IUserDao {
      * @return пользователь обернутый в Optional.
      */
     @Override
-    public Optional<User> findUserByUsername(String username) {
+    public Optional<User> findUserByLogin(String username) {
 
         try (var connect = connection.getConnection();
              var statement = connect.prepareStatement(SQL_FIND_USER_BY_USERNAME)) {

@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Модель для парсинга данных пользователя из JSON.
  */
-public class UserDto {
+public class UserDtoRequest {
 
     private final String login;
     private final String password;
 
     @JsonCreator
-    public UserDto(
+    public UserDtoRequest(
             @JsonProperty("login") String login,
             @JsonProperty("password") String password
     ) {

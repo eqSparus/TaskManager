@@ -21,6 +21,6 @@ public interface IUserDao {
      * @param username имя пользователя.
      * @return пользователь обернутый в Optional.
      */
-    Optional<User> findUserByUsername(String username);
+    Optional<User> findUserByLogin(String username);
 
 }

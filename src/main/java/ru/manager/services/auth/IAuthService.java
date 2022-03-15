@@ -1,6 +1,6 @@
 package ru.manager.services.auth;
 
-import ru.manager.models.dto.UserDto;
+import ru.manager.models.dto.UserDtoRequest;
 
 /**
  * Интерфейс сервиса для реализции регистрации и авторизации пользователя.
@@ -13,7 +13,7 @@ public interface IAuthService {
      * @return true если пользователь добавлен, false если пользователь
      * не прошел проверку
      */
-    boolean registrationUser(UserDto dto);
+    boolean registrationUser(UserDtoRequest dto);
 
     /**
      * Метод для авторизации пользователя и ответа сервера.
@@ -21,5 +21,5 @@ public interface IAuthService {
      * @return true если пользователь авторизован, false если
      * пользователь не авторизован
      */
-    boolean authorizationUser(UserDto dto);
+    boolean authorizationUser(UserDtoRequest dto);
 }

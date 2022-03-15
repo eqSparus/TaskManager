@@ -43,7 +43,7 @@ public class MainRedirectFilter implements Filter {
 
             var str = cookie.getValue();
             var party = str.split(":");
-            var user = dao.findUserByUsername(party[0]).orElseThrow(IllegalArgumentException::new);
+            var user = dao.findUserByLogin(party[0]).orElseThrow(IllegalArgumentException::new);
 
             if (securityService.isMatchPassword(party[1], user.getPassword())) {
                 filterChain.doFilter(request, response);

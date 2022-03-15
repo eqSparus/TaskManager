@@ -1,6 +1,6 @@
 package ru.manager.servlets.auth;
 
-import ru.manager.models.dto.UserDto;
+import ru.manager.models.dto.UserDtoRequest;
 import ru.manager.services.auth.AuthUserService;
 import ru.manager.services.auth.IAuthService;
 import ru.manager.services.json.ParserJsonService;
@@ -50,7 +50,7 @@ public class RegistrationServlet extends HttpServlet {
         try (var reader = request.getReader();
              var writerResponse = response.getWriter()) {
 
-            var user = ParserJsonService.toObject(reader, UserDto.class);
+            var user = ParserJsonService.toObject(reader, UserDtoRequest.class);
 
             response.setContentType("application/json");
             if (service.registrationUser(user)) {

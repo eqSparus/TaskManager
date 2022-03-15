@@ -3,7 +3,7 @@ package ru.manager.services.auth;
 import ru.manager.dao.IUserDao;
 import ru.manager.dao.UserDaoImpl;
 import ru.manager.models.User;
-import ru.manager.models.dto.UserDto;
+import ru.manager.models.dto.UserDtoRequest;
 import ru.manager.services.crypt.SecurityService;
 import ru.manager.services.validations.IValidation;
 import ru.manager.services.validations.ValidationLoginService;
@@ -33,13 +33,13 @@ public class AuthUserService implements IAuthService {
      * не прошел проверку
      */
     @Override
-    public boolean registrationUser(UserDto dto) {
+    public boolean registrationUser(UserDtoRequest dto) {
 
         if (!validLogin.isValid(dto.getLogin()) && !validPass.isValid(dto.getPassword())) {
             return false;
         }
 
-        var user = dao.findUserByUsername(dto.getLogin());
+        var user = dao.findUserByLogin(dto.getLogin());
 
         if (user.isEmpty()) {
             var newUser = new User(dto.getLogin(), security.encrypt(dto.getPassword()));
@@ -56,8 +56,8 @@ public class AuthUserService implements IAuthService {
      * пользователь не авторизован
      */
     @Override
-    public boolean authorizationUser(UserDto dto) {
-        var user = dao.findUserByUsername(dto.getLogin());
+    public boolean authorizationUser(UserDtoRequest dto) {
+        var user = dao.findUserByLogin(dto.getLogin());
         return user.isPresent() && security.isMatchPassword(dto.getPassword(), user.get().getPassword());
     }
 

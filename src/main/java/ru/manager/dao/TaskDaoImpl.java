@@ -1,5 +1,6 @@
 package ru.manager.dao;
 
+import ru.manager.models.StatusTask;
 import ru.manager.models.Task;
 
 import java.sql.Date;
@@ -77,8 +78,15 @@ public class TaskDaoImpl implements ITaskDao {
 
             var result = statement.executeQuery();
 
-            if (result.next()){
-
+            if (result.next()) {
+                return Optional.of(new Task.Builder()
+                        .id(result.getLong("user_id"))
+                        .title(result.getString("title"))
+                        .description(result.getString("description"))
+                        .createdAt(result.getDate("created_at").toInstant())
+                        .completionAt(result.getDate("completion_at").toInstant())
+                        .status(StatusTask.convert(result.getString("status")))
+                        .build());
             }
 
         } catch (SQLException e) {

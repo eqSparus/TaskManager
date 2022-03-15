@@ -9,20 +9,16 @@ import java.util.Objects;
 public class Task {
 
     private Long id;
-
     private String title;
-
     private String description;
-
     private Instant createdAt;
-
     private Instant completionAt;
-
     private Instant frozenDay;
-
     private StatusTask status;
-
     private Long userId;
+
+    public Task() {
+    }
 
     public Task(Long id, String title, String description,
                 Instant createdAt, Instant completionAt,
@@ -37,17 +33,65 @@ public class Task {
         this.userId = userId;
     }
 
-    public Task(String title, String description, Instant createdAt,
-                Instant completionAt, Instant frozenDay,
-                StatusTask status, Long userId) {
-        this.title = title;
-        this.description = description;
-        this.createdAt = createdAt;
-        this.completionAt = completionAt;
-        this.frozenDay = frozenDay;
-        this.status = status;
-        this.userId = userId;
+    public static class Builder {
+
+        private Long id;
+        private String title;
+        private String description;
+        private Instant createdAt;
+        private Instant completionAt;
+        private Instant frozenDay;
+        private StatusTask status;
+        private Long userId;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder createdAt(Instant createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
+        public Builder completionAt(Instant completionAt) {
+            this.completionAt = completionAt;
+            return this;
+        }
+
+        public Builder frozenDay(Instant frozenDay) {
+            this.frozenDay = frozenDay;
+            return this;
+        }
+
+        public Builder status(StatusTask status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder userId(Long userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Task build() {
+            return new Task(
+                    id, title, description, createdAt,
+                    completionAt, frozenDay, status, userId
+            );
+        }
     }
+
 
     public Long getId() {
         return id;
