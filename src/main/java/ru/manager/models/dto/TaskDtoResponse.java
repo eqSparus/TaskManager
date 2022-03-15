@@ -2,20 +2,18 @@ package ru.manager.models.dto;
 
 import ru.manager.models.StatusTask;
 
-import java.time.Instant;
-
 public class TaskDtoResponse {
 
     private final Long id;
     private final String title;
     private final String description;
-    private final Instant createAt;
-    private final Instant completionAt;
+    private final long createAt;
+    private final long completionAt;
     private final StatusTask status;
 
 
     public TaskDtoResponse(Long id, String title, String description,
-                           Instant createAt, Instant completionAt, StatusTask status) {
+                           long createAt, long completionAt, StatusTask status) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -36,11 +34,11 @@ public class TaskDtoResponse {
         return description;
     }
 
-    public Instant getCreateAt() {
+    public long getCreateAt() {
         return createAt;
     }
 
-    public Instant getCompletionAt() {
+    public long getCompletionAt() {
         return completionAt;
     }
 

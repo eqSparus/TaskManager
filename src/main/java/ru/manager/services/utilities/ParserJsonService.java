@@ -1,4 +1,4 @@
-package ru.manager.services.json;
+package ru.manager.services.utilities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,40 +18,49 @@ public class ParserJsonService {
 
     /**
      * Метод для сериализации данных в JSON.
+     *
      * @param object класс для сериализции.
      * @return JSON строка.
      */
     public static <T> String toJson(T object) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(object);
+        return gerMapper().writeValueAsString(object);
     }
 
     /**
      * Метод для преобразования строки JSON в оъект.
+     *
      * @param json  строка.
      * @param clazz класс парсинга.
      * @return возвращает объект JSON.
      */
     public static <T> T toObject(String json, Class<T> clazz) throws JsonProcessingException {
-        return new ObjectMapper().readValue(json, clazz);
+        return gerMapper().readValue(json, clazz);
     }
 
     /**
      * Метод для преобразования потока символов в оъект.
+     *
      * @param reader поток символов.
      * @param clazz  класс парсинга.
      * @return возвращает объект JSON.
      */
     public static <T> T toObject(Reader reader, Class<T> clazz) throws IOException {
-        return new ObjectMapper().readValue(reader, clazz);
+        return gerMapper().readValue(reader, clazz);
     }
 
     /**
      * Метод для преобразования потока байтов в оъект.
+     *
      * @param stream поток байтов.
      * @param clazz  класс парсинга.
      * @return возвращает объект JSON.
      */
     public static <T> T toObject(InputStream stream, Class<T> clazz) throws IOException {
-        return new ObjectMapper().readValue(stream, clazz);
+        return gerMapper().readValue(stream, clazz);
+    }
+
+
+    private static ObjectMapper gerMapper() {
+        return new ObjectMapper();
     }
 }

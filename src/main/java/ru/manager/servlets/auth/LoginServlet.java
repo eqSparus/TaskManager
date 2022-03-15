@@ -3,7 +3,7 @@ package ru.manager.servlets.auth;
 import ru.manager.models.dto.UserDtoRequest;
 import ru.manager.services.auth.AuthUserService;
 import ru.manager.services.auth.IAuthService;
-import ru.manager.services.json.ParserJsonService;
+import ru.manager.services.utilities.ParserJsonService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

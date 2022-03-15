@@ -21,14 +21,15 @@ public class LoginRedirectFilter implements Filter {
         var request = (HttpServletRequest) servletRequest;
         var response = (HttpServletResponse) servletResponse;
 
-        var cookie = Arrays.stream(request.getCookies())
-                .filter(c -> "user".equals(c.getName()))
-                .findAny();
-
-        if (cookie.isPresent()) {
-            response.sendRedirect("main");
-        } else {
-            filterChain.doFilter(request, response);
+        var cookies = request.getCookies();
+        if (cookies != null) {
+            var cookie = Arrays.stream(cookies)
+                    .filter(c -> "user".equals(c.getName()))
+                    .findAny();
+            if (cookie.isPresent()) {
+                response.sendRedirect("main");
+            }
         }
+        filterChain.doFilter(request, response);
     }
 }

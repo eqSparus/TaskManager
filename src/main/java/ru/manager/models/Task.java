@@ -1,5 +1,7 @@
 package ru.manager.models;
 
+import ru.manager.models.builder.TaskBuilder;
+
 import java.time.Instant;
 import java.util.Objects;
 
@@ -33,65 +35,9 @@ public class Task {
         this.userId = userId;
     }
 
-    public static class Builder {
-
-        private Long id;
-        private String title;
-        private String description;
-        private Instant createdAt;
-        private Instant completionAt;
-        private Instant frozenDay;
-        private StatusTask status;
-        private Long userId;
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder title(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder description(String description) {
-            this.description = description;
-            return this;
-        }
-
-        public Builder createdAt(Instant createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        public Builder completionAt(Instant completionAt) {
-            this.completionAt = completionAt;
-            return this;
-        }
-
-        public Builder frozenDay(Instant frozenDay) {
-            this.frozenDay = frozenDay;
-            return this;
-        }
-
-        public Builder status(StatusTask status) {
-            this.status = status;
-            return this;
-        }
-
-        public Builder userId(Long userId) {
-            this.userId = userId;
-            return this;
-        }
-
-        public Task build() {
-            return new Task(
-                    id, title, description, createdAt,
-                    completionAt, frozenDay, status, userId
-            );
-        }
+    public static TaskBuilder builder() {
+        return new TaskBuilder();
     }
-
 
     public Long getId() {
         return id;
@@ -162,11 +108,21 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(getId(), task.getId()) && Objects.equals(getTitle(), task.getTitle()) && Objects.equals(getDescription(), task.getDescription()) && Objects.equals(getCreatedAt(), task.getCreatedAt()) && Objects.equals(getCompletionAt(), task.getCompletionAt()) && Objects.equals(getFrozenDay(), task.getFrozenDay()) && getStatus() == task.getStatus() && Objects.equals(getUserId(), task.getUserId());
+        return Objects.equals(getId(), task.getId())
+                && Objects.equals(getTitle(), task.getTitle())
+                && Objects.equals(getDescription(), task.getDescription())
+                && Objects.equals(getCreatedAt(), task.getCreatedAt())
+                && Objects.equals(getCompletionAt(), task.getCompletionAt())
+                && Objects.equals(getFrozenDay(), task.getFrozenDay())
+                && getStatus() == task.getStatus()
+                && Objects.equals(getUserId(), task.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescription(), getCreatedAt(), getCompletionAt(), getFrozenDay(), getStatus(), getUserId());
+        return Objects.hash(getId(), getTitle(), getDescription(),
+                getCreatedAt(), getCompletionAt(),
+                getFrozenDay(), getStatus(), getUserId());
     }
+
 }

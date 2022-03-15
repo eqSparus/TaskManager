@@ -1,29 +1,23 @@
 package ru.manager.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.time.Instant;
 
 public class TaskDtoRequest {
 
     private final String title;
     private final String description;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd:MM:yyyy")
-    private final Instant createAt;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd:MM:yyyy")
-    private final Instant completionAt;
+    private final Long createAt;
+    private final Long completionAt;
 
     @JsonCreator
     public TaskDtoRequest(
             @JsonProperty("title") String title,
             @JsonProperty("description") String description,
-            @JsonProperty("createAt") Instant createAt,
-            @JsonProperty("completionAt") Instant completionAt
+            @JsonProperty("createAt") Long createAt,
+            @JsonProperty("completionAt") Long completionAt
     ) {
+
         this.title = title;
         this.description = description;
         this.createAt = createAt;
@@ -38,11 +32,11 @@ public class TaskDtoRequest {
         return description;
     }
 
-    public Instant getCreateAt() {
+    public Long getCreateAt() {
         return createAt;
     }
 
-    public Instant getCompletionAt() {
+    public Long getCompletionAt() {
         return completionAt;
     }
 
