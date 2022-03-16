@@ -12,5 +12,9 @@ public interface ITaskDao extends IDao<Task> {
 
     Optional<Task> findTaskById(Long id);
 
-    void updateTaskStatus(StatusTask status, Long id);
+    Optional<Task> getUpdateTaskStatus(StatusTask status, Long id);
+
+    Optional<Task> getUpdateFrozenTime(long frozenTime, Long id);
+
+    Optional<Task> getUpdateActiveTime(long completionAt, Long id);
 }

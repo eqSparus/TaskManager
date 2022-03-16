@@ -4,8 +4,8 @@ import ru.manager.dao.IUserDao;
 import ru.manager.dao.UserDaoImpl;
 import ru.manager.models.User;
 import ru.manager.models.dto.UserDtoRequest;
-import ru.manager.services.crypt.SecurityService;
 import ru.manager.services.validations.IValidation;
+import ru.manager.services.crypt.SecurityService;
 import ru.manager.services.validations.ValidationLoginService;
 import ru.manager.services.validations.ValidationPasswordService;
 

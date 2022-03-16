@@ -18,7 +18,6 @@ public class ParserJsonService {
 
     /**
      * Метод для сериализации данных в JSON.
-     *
      * @param object класс для сериализции.
      * @return JSON строка.
      */
@@ -28,7 +27,6 @@ public class ParserJsonService {
 
     /**
      * Метод для преобразования строки JSON в оъект.
-     *
      * @param json  строка.
      * @param clazz класс парсинга.
      * @return возвращает объект JSON.
@@ -39,7 +37,6 @@ public class ParserJsonService {
 
     /**
      * Метод для преобразования потока символов в оъект.
-     *
      * @param reader поток символов.
      * @param clazz  класс парсинга.
      * @return возвращает объект JSON.
@@ -50,7 +47,6 @@ public class ParserJsonService {
 
     /**
      * Метод для преобразования потока байтов в оъект.
-     *
      * @param stream поток байтов.
      * @param clazz  класс парсинга.
      * @return возвращает объект JSON.

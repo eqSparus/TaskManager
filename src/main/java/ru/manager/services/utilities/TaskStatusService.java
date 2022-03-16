@@ -19,8 +19,8 @@ public class TaskStatusService {
 
         if (task.getStatus().equals(StatusTask.ACTIVE) &&
                 task.getCompletionAt().toEpochMilli() <= Instant.now().toEpochMilli()) {
-            taskDao.updateTaskStatus(StatusTask.FAILED, task.getId());
-            task.setStatus(StatusTask.FAILED);
+            return taskDao.getUpdateTaskStatus(StatusTask.FAILED, task.getId())
+                    .orElseThrow(IllegalArgumentException::new);
         }
 
         return task;

@@ -14,28 +14,34 @@ import java.util.Optional;
 public class TaskDaoImpl implements ITaskDao {
 
     private static final String SQL_CREATE_TASK =
-            "INSERT INTO tasks (title, description, created_at, completion_at, status, fk_user) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO tasks (title, description, created_at, completion_at, frozen_day, status, fk_user) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_FIND_TASK_BY_ID =
-            "SELECT task_id, title, description, created_at, completion_at, status " +
+            "SELECT task_id, title, description, created_at, completion_at, frozen_day, status " +
                     "FROM tasks WHERE task_id = ?";
 
     private static final String SQL_DELETE_TASK_BY_ID =
             "DELETE FROM tasks WHERE task_id = ?";
 
     private static final String SQL_FIND_ALL_BY_USER_ID =
-            "SELECT task_id, title, description, created_at, completion_at, status " +
+            "SELECT task_id, title, description, created_at, completion_at, frozen_day, status " +
                     "FROM tasks WHERE fk_user = ?";
 
     private static final String SQL_FIND_ALL =
-            "SELECT task_id, title, description, created_at, completion_at, status FROM tasks";
+            "SELECT task_id, title, description, created_at, completion_at, frozen_day, status FROM tasks";
 
     private static final String SQL_UPDATE_TASK_BY_ID =
             "UPDATE tasks SET title = ?, description = ? WHERE task_id = ?";
 
     private static final String SQL_UPDATE_TASK_STATUS_BY_ID =
             "UPDATE tasks SET status = ? WHERE task_id = ?";
+
+    private static final String SQL_UPDATE_TASK_FROZEN_TIME_BY_ID =
+            "UPDATE tasks SET frozen_day = ? WHERE task_id = ?";
+
+    private static final String SQL_UPDATE_TASK_COMPLETION_AT_BY_ID =
+            "UPDATE tasks SET completion_at = ? WHERE task_id = ?";
 
     private final ConnectionDatabase connection;
 
@@ -54,9 +60,10 @@ public class TaskDaoImpl implements ITaskDao {
             statement.setString(1, task.getTitle());
             statement.setString(2, task.getDescription());
             statement.setLong(3, task.getCreatedAt().toEpochMilli());
-            statement.setObject(4, task.getCompletionAt().toEpochMilli());
-            statement.setString(5, task.getStatus().toString());
-            statement.setLong(6, task.getUserId());
+            statement.setLong(4, task.getCompletionAt().toEpochMilli());
+            statement.setLong(5, 0L);
+            statement.setString(6, task.getStatus().toString());
+            statement.setLong(7, task.getUserId());
 
             statement.executeUpdate();
 
@@ -176,7 +183,7 @@ public class TaskDaoImpl implements ITaskDao {
     }
 
     @Override
-    public void updateTaskStatus(StatusTask status, Long id) {
+    public Optional<Task> getUpdateTaskStatus(StatusTask status, Long id) {
 
         try (var con = connection.getConnection();
              var statement = con.prepareStatement(SQL_UPDATE_TASK_STATUS_BY_ID)) {
@@ -185,9 +192,45 @@ public class TaskDaoImpl implements ITaskDao {
             statement.setLong(2, id);
             statement.executeUpdate();
 
+            return findTaskById(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Task> getUpdateFrozenTime(long frozenTime, Long id) {
+
+        try (var con = connection.getConnection();
+             var statement = con.prepareStatement(SQL_UPDATE_TASK_FROZEN_TIME_BY_ID)) {
+
+            statement.setLong(1, frozenTime);
+            statement.setLong(2, id);
+            statement.executeUpdate();
+
+            return findTaskById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Task> getUpdateActiveTime(long completionAt, Long id) {
+
+        try (var con = connection.getConnection();
+             var statement = con.prepareStatement(SQL_UPDATE_TASK_COMPLETION_AT_BY_ID)) {
+
+            statement.setLong(1, completionAt);
+            statement.setLong(2, id);
+            statement.executeUpdate();
+
+            return findTaskById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
 
@@ -198,6 +241,7 @@ public class TaskDaoImpl implements ITaskDao {
                 .description(result.getString("description"))
                 .createdAt(Instant.ofEpochMilli(result.getLong("created_at")))
                 .completionAt(Instant.ofEpochMilli(result.getLong("completion_at")))
+                .frozenDay(Instant.ofEpochMilli(result.getLong("frozen_day")))
                 .status(StatusTask.convert(result.getString("status")))
                 .build();
     }
