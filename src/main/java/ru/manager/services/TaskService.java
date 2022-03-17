@@ -41,9 +41,14 @@ public class TaskService implements ITaskService {
 
         var newTask = taskDao.create(task).orElseThrow(IllegalArgumentException::new);
 
-        return new TaskDtoResponse(newTask.getId(), newTask.getTitle(), newTask.getDescription(),
-                newTask.getCreatedAt().toEpochMilli(), newTask.getCompletionAt().toEpochMilli(),
-                newTask.getStatus());
+        return TaskDtoResponse.builder()
+                .id(newTask.getId())
+                .title(newTask.getTitle())
+                .description(newTask.getDescription())
+                .createAt(newTask.getCreatedAt().toEpochMilli())
+                .completionAt(newTask.getCompletionAt().toEpochMilli())
+                .status(newTask.getStatus())
+                .build();
     }
 
     @Override
@@ -55,11 +60,15 @@ public class TaskService implements ITaskService {
 
         return task.stream()
                 .map(statusService::checkStatus)
-                .map(t -> new TaskDtoResponse(
-                        t.getId(), t.getTitle(), t.getDescription(), t.getCreatedAt().toEpochMilli(),
-                        t.getCompletionAt().toEpochMilli(), t.getStatus()
-                ))
-                .toList();
+                .map(t -> TaskDtoResponse.builder()
+                        .id(t.getId())
+                        .title(t.getTitle())
+                        .description(t.getDescription())
+                        .createAt(t.getCreatedAt().toEpochMilli())
+                        .completionAt(t.getCompletionAt().toEpochMilli())
+                        .status(t.getStatus())
+                        .build()
+                ).toList();
     }
 
     @Override
@@ -75,10 +84,14 @@ public class TaskService implements ITaskService {
                 .description(dtoRequest.getDescription())
                 .build(), id).orElseThrow(IllegalArgumentException::new);
 
-        return new TaskDtoResponse(
-                task.getId(), task.getTitle(), task.getDescription(), task.getCreatedAt().toEpochMilli(),
-                task.getCompletionAt().toEpochMilli(), task.getStatus()
-        );
+        return TaskDtoResponse.builder()
+                .id(task.getId())
+                .title(task.getTitle())
+                .description(task.getDescription())
+                .createAt(task.getCreatedAt().toEpochMilli())
+                .completionAt(task.getCompletionAt().toEpochMilli())
+                .status(task.getStatus())
+                .build();
     }
 
 

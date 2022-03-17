@@ -1,6 +1,7 @@
 package ru.manager.models.dto;
 
 import ru.manager.models.StatusTask;
+import ru.manager.models.builder.TaskDtoResponseBuilder;
 
 public class TaskDtoResponse {
 
@@ -20,6 +21,10 @@ public class TaskDtoResponse {
         this.createAt = createAt;
         this.completionAt = completionAt;
         this.status = status;
+    }
+
+    public static TaskDtoResponseBuilder builder(){
+        return new TaskDtoResponseBuilder();
     }
 
     public Long getId() {

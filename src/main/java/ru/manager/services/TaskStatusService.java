@@ -26,11 +26,14 @@ public class TaskStatusService implements ITaskStatusService {
         var updateTask =
                 taskDao.getUpdateFrozenTime(timeUpdateAt, id).orElseThrow(IllegalArgumentException::new);
 
-        return new TaskDtoResponse(
-                updateTask.getId(), updateTask.getTitle(), updateTask.getDescription(),
-                updateTask.getCreatedAt().toEpochMilli(),
-                updateTask.getCompletionAt().toEpochMilli(), updateTask.getStatus()
-        );
+        return TaskDtoResponse.builder()
+                .id(updateTask.getId())
+                .title(updateTask.getTitle())
+                .description(updateTask.getDescription())
+                .createAt(updateTask.getCreatedAt().toEpochMilli())
+                .completionAt(updateTask.getCompletionAt().toEpochMilli())
+                .status(updateTask.getStatus())
+                .build();
     }
 
     @Override
@@ -38,11 +41,14 @@ public class TaskStatusService implements ITaskStatusService {
         var updateTask = taskDao.getUpdateTaskStatus(StatusTask.DONE, id)
                 .orElseThrow(IllegalArgumentException::new);
 
-        return new TaskDtoResponse(
-                updateTask.getId(), updateTask.getTitle(), updateTask.getDescription(),
-                updateTask.getCreatedAt().toEpochMilli(),
-                updateTask.getCompletionAt().toEpochMilli(), updateTask.getStatus()
-        );
+        return TaskDtoResponse.builder()
+                .id(updateTask.getId())
+                .title(updateTask.getTitle())
+                .description(updateTask.getDescription())
+                .createAt(updateTask.getCreatedAt().toEpochMilli())
+                .completionAt(updateTask.getCompletionAt().toEpochMilli())
+                .status(updateTask.getStatus())
+                .build();
     }
 
     @Override
@@ -55,11 +61,14 @@ public class TaskStatusService implements ITaskStatusService {
 
         var updateTask = taskDao.getUpdateActiveTime(time, id).orElseThrow(IllegalArgumentException::new);
 
-        return new TaskDtoResponse(
-                updateTask.getId(), updateTask.getTitle(), updateTask.getDescription(),
-                updateTask.getCreatedAt().toEpochMilli(),
-                updateTask.getCompletionAt().toEpochMilli(), updateTask.getStatus()
-        );
+        return TaskDtoResponse.builder()
+                .id(updateTask.getId())
+                .title(updateTask.getTitle())
+                .description(updateTask.getDescription())
+                .createAt(updateTask.getCreatedAt().toEpochMilli())
+                .completionAt(updateTask.getCompletionAt().toEpochMilli())
+                .status(updateTask.getStatus())
+                .build();
     }
 
 }
