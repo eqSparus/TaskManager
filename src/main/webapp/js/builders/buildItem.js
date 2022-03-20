@@ -1,15 +1,19 @@
-import {ACTIVE, DONE, FROZEN} from "./buildTable.js";
+import {ACTIVE, DONE, FAILED, FROZEN, utilField} from "../utilities/utilField.js";
 
 export const buildItem = (task, type) => {
 
     const tr = document.createElement('tr')
-    const thTitle = document.createElement('th')
-    const thDescription = document.createElement('th')
-    const thDateStart = document.createElement('th')
-    const thDateStop = document.createElement('th')
+    const thTitle = document.createElement('td')
+    const thDescription = document.createElement('td')
+    const thDateStart = document.createElement('td')
+    const thDateStop = document.createElement('td')
 
     thTitle.className = 'text-dark fs-5'
-    thDescription.className = 'text-dark fs-5'
+    thTitle.style.cssText = 'word-wrap:break-word'
+
+    thDescription.className = 'text-dark fs-5 td_text'
+    thDescription.style.cssText = 'word-wrap:break-word'
+
     thDateStart.className = 'text-dark fs-5'
     thDateStop.className = 'text-dark fs-5'
 
@@ -25,24 +29,32 @@ export const buildItem = (task, type) => {
 
     switch (type) {
 
-        case 'ACTIVE':
+        case ACTIVE:
+            thTitle.setAttribute("contenteditable", true)
+            thTitle.setAttribute("spellcheck", false)
+            thDescription.setAttribute("contenteditable", true)
+            thDescription.setAttribute("spellcheck", false)
             doneButton(tr, task.id)
-            updateButton(tr)
+            updateButton(tr, task.id, thTitle, thDescription)
             frozenButton(tr, task.id)
             deleteButton(tr, task.id)
             break
 
-        case 'DONE':
+        case DONE:
             deleteButton(tr, task.id)
             break
 
-        case 'FROZEN':
+        case FROZEN:
+            thTitle.setAttribute("contenteditable", true)
+            thTitle.setAttribute("spellcheck", false)
+            thDescription.setAttribute("contenteditable", true)
+            thDescription.setAttribute("spellcheck", false)
             activeButton(tr, task.id)
-            updateButton(tr)
+            updateButton(tr, task.id, thTitle, thDescription)
             deleteButton(tr, task.id)
             break
 
-        case 'FAILED':
+        case FAILED:
             deleteButton(tr, task.id)
             break
     }
@@ -52,7 +64,7 @@ export const buildItem = (task, type) => {
 
 
 const activeButton = (tr, id) => {
-    const thActiveTask = document.createElement('th')
+    const thActiveTask = document.createElement('td')
     const activeButton = document.createElement('button')
     activeButton.className = 'btn btn-warning text-dark fs-5'
     activeButton.textContent = 'Active task'
@@ -80,7 +92,7 @@ const activeButton = (tr, id) => {
 }
 
 const doneButton = (tr, id) => {
-    const thDoneTask = document.createElement('th')
+    const thDoneTask = document.createElement('td')
     const doneButton = document.createElement('button')
     doneButton.className = 'btn btn-warning text-dark fs-5'
     doneButton.textContent = 'Done task'
@@ -108,7 +120,7 @@ const doneButton = (tr, id) => {
 }
 
 const frozenButton = (tr, id) => {
-    const thFrozenTask = document.createElement('th')
+    const thFrozenTask = document.createElement('td')
     const frozenButton = document.createElement('button')
     frozenButton.className = 'btn btn-info text-dark fs-5'
     frozenButton.textContent = 'Frozen task'
@@ -136,7 +148,7 @@ const frozenButton = (tr, id) => {
 }
 
 const deleteButton = (tr, id) => {
-    const thDeleteTask = document.createElement('th')
+    const thDeleteTask = document.createElement('td')
     const deleteButton = document.createElement('button')
     deleteButton.className = 'btn btn-danger text-dark fs-5'
     deleteButton.textContent = 'Delete task'
@@ -154,12 +166,39 @@ const deleteButton = (tr, id) => {
     tr.appendChild(thDeleteTask)
 }
 
-const updateButton = (tr) => {
-    const thUpdateTask = document.createElement('th')
+const updateButton = (tr, id, title, description) => {
+    const thUpdateTask = document.createElement('td')
     const updateButton = document.createElement('button')
     updateButton.className = 'btn btn-primary text-dark fs-5'
     updateButton.textContent = 'Update task'
     updateButton.onclick = () => {
+
+        const titleValue = title.textContent
+        const descriptionValue = description.textContent
+
+        const urlParam = new URLSearchParams({"id": id})
+
+        fetch(`task/crud?${urlParam}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "title": titleValue,
+                "description": descriptionValue
+            })
+        }).then(response => {
+            if (response.ok) {
+                tr.remove()
+                response.json()
+                    .then(value => {
+                        const status = value.status.toLowerCase()
+                        const table = utilField(status)
+                        const item = buildItem(value, status)
+                        table.appendChild(item)
+                    })
+            }
+        })
 
     }
     thUpdateTask.appendChild(updateButton)

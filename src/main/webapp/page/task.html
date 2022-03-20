@@ -24,7 +24,7 @@
 
         <div class="collapse navbar-collapse">
             <div class="navbar-nav me-auto">
-                <a class="navbar-brand fs-2" href="/main">Task Manager</a>
+                <a class="navbar-brand fs-2" href="/task">Task Manager</a>
 
             </div>
             <div class="d-flex">
@@ -61,23 +61,25 @@
                 <div class="text-success text-center">Active</div>
                 <div class="alert alert-success field field_container">
 
-                    <table class="table table-success table-striped">
-                        <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Date start</th>
-                            <th>Date end</th>
-                            <th>Done Task</th>
-                            <th>Update Task</th>
-                            <th>Frozen Task</th>
-                            <th>Delete Task</th>
-                        </tr>
-                        </thead>
-                        <tbody id="field_active">
+                    <div class="table_over">
+                        <table class="table table-success table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date start</th>
+                                <th>Date end</th>
+                                <th>Done Task</th>
+                                <th>Update Task</th>
+                                <th>Frozen Task</th>
+                                <th>Delete Task</th>
+                            </tr>
+                            </thead>
+                            <tbody id="field_active">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
@@ -86,20 +88,22 @@
                 <div class="text-warning text-center">Done</div>
                 <div class="alert alert-warning field field_container">
 
-                    <table class="table table-warning table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date start</th>
-                            <th scope="col">Date end</th>
-                            <th scope="col">Delete Task</th>
-                        </tr>
-                        </thead>
-                        <tbody id="field_done">
+                    <div class="table_over">
+                        <table class="table table-warning table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date start</th>
+                                <th>Date end</th>
+                                <th>Delete Task</th>
+                            </tr>
+                            </thead>
+                            <tbody id="field_done">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
@@ -108,22 +112,24 @@
                 <div class="text-info text-center">Frozen</div>
                 <div class="alert alert-info field field_container">
 
-                    <table class="table table-info table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date start</th>
-                            <th scope="col">Date end</th>
-                            <th scope="col">Active Task</th>
-                            <th scope="col">Update Task</th>
-                            <th scope="col">Delete Task</th>
-                        </tr>
-                        </thead>
-                        <tbody id="field_frozen">
+               <div class="table_over">
+                   <table class="table table-info table-striped text-center">
+                       <thead>
+                       <tr>
+                           <th>Title</th>
+                           <th>Description</th>
+                           <th>Date start</th>
+                           <th>Date end</th>
+                           <th>Active Task</th>
+                           <th>Update Task</th>
+                           <th>Delete Task</th>
+                       </tr>
+                       </thead>
+                       <tbody id="field_frozen">
 
-                        </tbody>
-                    </table>
+                       </tbody>
+                   </table>
+               </div>
 
                 </div>
             </div>
@@ -132,20 +138,23 @@
                 <div class="text-danger text-center">Failed</div>
                 <div class="alert alert-danger field field_container">
 
-                    <table class="table table-danger table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date start</th>
-                            <th scope="col">Date end</th>
-                            <th scope="col">Delete Task</th>
-                        </tr>
-                        </thead>
-                        <tbody id="field_failed">
+                    <div class="table_over">
+                        <table class="table table-danger table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date start</th>
+                                <th>Date end</th>
+                                <th>Delete Task</th>
+                            </tr>
+                            </thead>
+                            <tbody id="field_failed">
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+
+                    </div>
 
                 </div>
             </div>

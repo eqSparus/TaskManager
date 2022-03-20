@@ -7,6 +7,14 @@ body {
     font-family: 'Roboto', 'Roboto Light', sans-serif !important;
 }
 
+td:focus{
+    outline: blue 1px solid;
+}
+
+table{
+    table-layout: fixed;
+    width: 100%;
+}
 
 .form_container {
     max-width: 400px;
@@ -44,7 +52,26 @@ body {
 .field_container {
     display: grid;
     grid-template-columns: 1fr;
+    max-height: 85vh;
 }
+.table_over{
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color:  #343a40 #6c757d;
+}
+
+*::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+*::-webkit-scrollbar-track {
+    background: #6c757d;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #343a40;
+}
+
 
 .item_container {
     display: grid;

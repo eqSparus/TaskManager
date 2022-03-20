@@ -1,5 +1,6 @@
 import {swapShow} from "./utilities/swapShow.js";
-import {ACTIVE, buildTable, DONE, FAILED, FROZEN} from "./builders/buildTable.js";
+import {buildTable} from "./builders/buildTable.js";
+import {ACTIVE, DONE, FAILED, FROZEN} from "./utilities/utilField.js";
 import {buildItem} from "./builders/buildItem.js";
 
 document.querySelector('#btn_task_done').onclick = () => {
