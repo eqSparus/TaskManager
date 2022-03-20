@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Сервлет для взаимодействия с задачами
+ */
 @WebServlet(urlPatterns = "/task/crud", name = "TaskServletCrud")
 public class TaskServletCrud extends HttpServlet {
 
@@ -23,6 +26,9 @@ public class TaskServletCrud extends HttpServlet {
         taskService = new TaskService();
     }
 
+    /**
+     * Возвращает все задачи пользователя
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,6 +50,9 @@ public class TaskServletCrud extends HttpServlet {
 
     }
 
+    /**
+     * Создает и возвращает созданую задачу
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,6 +77,9 @@ public class TaskServletCrud extends HttpServlet {
         }
     }
 
+    /**
+     * Удаляет задачу
+     */
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,7 +88,9 @@ public class TaskServletCrud extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
-
+    /**
+     * Обновляет название и описания задачи и возвращает её
+     */
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

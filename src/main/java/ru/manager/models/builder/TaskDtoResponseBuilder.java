@@ -3,6 +3,10 @@ package ru.manager.models.builder;
 import ru.manager.models.StatusTask;
 import ru.manager.models.dto.TaskDtoResponse;
 
+/**
+ * Реалиция паттерна строитель для класса TaskDtoResponse.
+ * @see ru.manager.models.dto.TaskDtoResponse
+ */
 public class TaskDtoResponseBuilder {
 
     private Long id;

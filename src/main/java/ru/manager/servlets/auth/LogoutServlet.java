@@ -9,9 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Сервлет для выхода пользователя.
+ */
 @WebServlet(urlPatterns = "/logout", name = "LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 
+    /**
+     * Удаляет cookie пользователя и перенаправляет на страницу входа.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

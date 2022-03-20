@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 /**
- * Модель задач
+ * Модель задач.
  */
 public class Task {
 
@@ -35,6 +35,10 @@ public class Task {
         this.userId = userId;
     }
 
+    /**
+     * Метод для паттерна строитель.
+     * @return возвращает строителя для Task
+     */
     public static TaskBuilder builder() {
         return new TaskBuilder();
     }

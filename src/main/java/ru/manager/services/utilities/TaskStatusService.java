@@ -7,6 +7,9 @@ import ru.manager.models.Task;
 
 import java.time.Instant;
 
+/**
+ * Сервис для проверки и изменения статуса задачи.
+ */
 public class TaskStatusService {
 
     private final ITaskDao taskDao;
@@ -15,6 +18,12 @@ public class TaskStatusService {
         this.taskDao = new TaskDaoImpl();
     }
 
+    /**
+     * Метод для проверки стутуса задачи, если время выполнения задача истекло
+     * то статус задачи меняется на проваленую иначе задача просто возвращается.
+     * @param task задача для проверки
+     * @return проверяная задача
+     */
     public Task checkStatus(Task task) {
 
         if (task.getStatus().equals(StatusTask.ACTIVE) &&

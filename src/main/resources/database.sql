@@ -12,9 +12,9 @@ CREATE TABLE tasks
     task_id       BIGSERIAL PRIMARY KEY,
     title         VARCHAR(50) NOT NULL,
     description   TEXT        NOT NULL,
-    created_at    bigint      NOT NULL,
-    completion_at bigint      NOT NULL,
-    frozen_day    bigint,
+    created_at    BIGINT      NOT NULL,
+    completion_at BIGINT      NOT NULL,
+    frozen_day    BIGINT,
     status        VARCHAR(20) NOT NULL,
     fk_user       BIGSERIAL REFERENCES users (user_id)
 );

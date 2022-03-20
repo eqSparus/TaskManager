@@ -5,6 +5,10 @@ import ru.manager.models.Task;
 
 import java.time.Instant;
 
+/**
+ * Реалиция паттерна строитель для класса Task.
+ * @see ru.manager.models.Task
+ */
 public class TaskBuilder {
 
     private Long id;

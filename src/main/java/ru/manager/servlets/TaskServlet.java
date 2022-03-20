@@ -7,9 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Сервлет страницы задач
+ */
 @WebServlet(urlPatterns = "/task", name = "MainServlet")
 public class TaskServlet extends HttpServlet {
 
+    /**
+     * Возвращает страницу задач
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

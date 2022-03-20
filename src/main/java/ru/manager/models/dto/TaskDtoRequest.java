@@ -3,6 +3,9 @@ package ru.manager.models.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Dto класс задачи для тела запроса.
+ */
 public class TaskDtoRequest {
 
     private final String title;

@@ -13,6 +13,9 @@ import ru.manager.services.utilities.TaskStatusService;
 import java.time.Instant;
 import java.util.List;
 
+/**
+ * Crud сервис для манипуляции задачами
+ */
 public class TaskService implements ITaskService {
 
     private final IUserDao userDao;
@@ -25,6 +28,12 @@ public class TaskService implements ITaskService {
         this.statusService = new TaskStatusService();
     }
 
+    /**
+     * Метод для создания задачи пользователя.
+     * @param taskDto тело запроса на сервер.
+     * @param login имя пользователя.
+     * @return возвращает тела ответа сервера.
+     */
     @Override
     public TaskDtoResponse createTask(TaskDtoRequest taskDto, String login) {
 
@@ -51,6 +60,11 @@ public class TaskService implements ITaskService {
                 .build();
     }
 
+    /**
+     * Метод для получения всех задача пользователя.
+     * @param login имя пользователя.
+     * @return все задачи.
+     */
     @Override
     public List<TaskDtoResponse> getAllTasksByUserId(String login) {
 
@@ -71,11 +85,21 @@ public class TaskService implements ITaskService {
                 ).toList();
     }
 
+    /**
+     * Метод для удаления задачи.
+     * @param id идентификатор задачи.
+     */
     @Override
     public void deleteTaskById(Long id) {
         taskDao.delete(id);
     }
 
+    /**
+     * Метод для обновления названия и описания задачи.
+     * @param dtoRequest тело запроса на сервер.
+     * @param id идентификатор задачи.
+     * @return возвращает тела ответа сервера.
+     */
     @Override
     public TaskDtoResponse updateTitleAndDescriptionTaskById(TaskDtoRequest dtoRequest, Long id) {
 

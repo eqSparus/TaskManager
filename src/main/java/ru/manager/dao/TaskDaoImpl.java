@@ -49,7 +49,11 @@ public class TaskDaoImpl implements ITaskDao {
         connection = new ConnectionDatabase();
     }
 
-
+    /**
+     * Метод создает задачу в БД.
+     * @param task задача для добавления
+     * @return созданая задача
+     */
     @Override
     public Optional<Task> create(Task task) {
 
@@ -79,6 +83,10 @@ public class TaskDaoImpl implements ITaskDao {
         return Optional.empty();
     }
 
+    /**
+     * Метод удаляет задачу из БД по ID.
+     * @param id идентификтор задачи
+     */
     @Override
     public void delete(Long id) {
 
@@ -93,6 +101,12 @@ public class TaskDaoImpl implements ITaskDao {
 
     }
 
+    /**
+     * Метод обновляет название и описание задачи.
+     * @param task задачи для обновления
+     * @param id идентификтор задачи
+     * @return обновленная задача
+     */
     @Override
     public Optional<Task> update(Task task, Long id) {
 
@@ -118,6 +132,10 @@ public class TaskDaoImpl implements ITaskDao {
         return Optional.empty();
     }
 
+    /**
+     * Метод для получения всех задач из БД.
+     * @return все задачи из БД
+     */
     @Override
     public List<Task> findAll() {
 
@@ -139,6 +157,11 @@ public class TaskDaoImpl implements ITaskDao {
         return tasks;
     }
 
+    /**
+     * Метод для получения всех задач пользователя.
+     * @param userId идентификатор пользователя
+     * @return все задачи пользователя
+     */
     @Override
     public List<Task> findAllTasksByUserId(Long userId) {
 
@@ -162,6 +185,11 @@ public class TaskDaoImpl implements ITaskDao {
         return tasks;
     }
 
+    /**
+     * Метод для получения задачи по идентификатору.
+     * @param id идентификатор задачи
+     * @return найденую задачу
+     */
     @Override
     public Optional<Task> findTaskById(Long id) {
 
@@ -182,6 +210,12 @@ public class TaskDaoImpl implements ITaskDao {
         return Optional.empty();
     }
 
+    /**
+     * Метод для изменения статус задачи.
+     * @param status статус задачи
+     * @param id идентификатор задачи
+     * @return обновленную задачу
+     */
     @Override
     public Optional<Task> getUpdateTaskStatus(StatusTask status, Long id) {
 
@@ -199,6 +233,12 @@ public class TaskDaoImpl implements ITaskDao {
         return Optional.empty();
     }
 
+    /**
+     * Метод для изменения замороженного времени.
+     * @param frozenTime новое время для заморозки
+     * @param id идентификатор задачи
+     * @return обновленную задачу
+     */
     @Override
     public Optional<Task> getUpdateFrozenTime(long frozenTime, Long id) {
 
@@ -216,6 +256,12 @@ public class TaskDaoImpl implements ITaskDao {
         return Optional.empty();
     }
 
+    /**
+     * Метод для обновления времени завершения задачи.
+     * @param completionAt новое время завершения задачи
+     * @param id идентификатор задачи
+     * @return обновленную задачу
+     */
     @Override
     public Optional<Task> getUpdateActiveTime(long completionAt, Long id) {
 
@@ -234,6 +280,12 @@ public class TaskDaoImpl implements ITaskDao {
     }
 
 
+    /**
+     * Метод для создания объекта из данных БД
+     * @param result строчка из БД
+     * @return задача
+     * @throws SQLException
+     */
     private Task getTask(ResultSet result) throws SQLException {
         return Task.builder()
                 .id(result.getLong("task_id"))

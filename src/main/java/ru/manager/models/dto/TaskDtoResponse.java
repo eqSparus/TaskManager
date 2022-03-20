@@ -3,6 +3,9 @@ package ru.manager.models.dto;
 import ru.manager.models.StatusTask;
 import ru.manager.models.builder.TaskDtoResponseBuilder;
 
+/**
+ * Dto класс задачи для ответа от сервера.
+ */
 public class TaskDtoResponse {
 
     private final Long id;
@@ -23,6 +26,10 @@ public class TaskDtoResponse {
         this.status = status;
     }
 
+    /**
+     * Метод для паттерна строитель.
+     * @return возвращает строителя для TaskDtoResponse
+     */
     public static TaskDtoResponseBuilder builder(){
         return new TaskDtoResponseBuilder();
     }

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Сервлет для обновления статуса задачи
+ */
 @WebServlet(name = "TaskStatusServlet", urlPatterns = "/task/status")
 public class TaskStatusServlet extends HttpServlet {
 
@@ -22,6 +25,9 @@ public class TaskStatusServlet extends HttpServlet {
         statusService = new TaskStatusService();
     }
 
+    /**
+     * Обновляет статус задачи и возвращает её клиенту
+     */
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
