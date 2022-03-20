@@ -46,7 +46,7 @@ public class MainRedirectFilter implements Filter {
             var user = dao.findUserByLogin(party[0]).orElseThrow(IllegalArgumentException::new);
 
             if (securityService.isMatchPassword(party[1], user.getPassword())) {
-                filterChain.doFilter(request, response);
+                filterChain.doFilter(servletRequest, servletResponse);
             } else {
                 throw new RuntimeException();
             }

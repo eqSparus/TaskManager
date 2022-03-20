@@ -1,4 +1,4 @@
-html{
+html {
     height: 100%;
     overflow: hidden;
 }
@@ -6,6 +6,7 @@ html{
 body {
     font-family: 'Roboto', 'Roboto Light', sans-serif !important;
 }
+
 
 .form_container {
     max-width: 400px;
@@ -22,19 +23,43 @@ body {
     background: #8FC4B7;
 }
 
-.main_container {
+.task_container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 85% 15%;
-    height: 100vh;
+    grid-template-columns: 10% 90%;
 }
 
-.field{
-    height: 78vh;
+.btn_container {
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
-.btn_center{
-    grid-column-start: 2;
+.show {
+    display: grid;
+}
+
+.none {
+    display: none;
+}
+
+.field_container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.item_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.body_description{
+    grid-column-start: 1;
     grid-column-end: 3;
-    justify-self: center;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.btn_item_container{
+    grid-row-start: 1;
+    grid-row-end: 4;
 }

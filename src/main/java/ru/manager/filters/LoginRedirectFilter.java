@@ -23,13 +23,18 @@ public class LoginRedirectFilter implements Filter {
 
         var cookies = request.getCookies();
         if (cookies != null) {
+
             var cookie = Arrays.stream(cookies)
                     .filter(c -> "user".equals(c.getName()))
                     .findAny();
             if (cookie.isPresent()) {
-                response.sendRedirect("main");
+                response.sendRedirect("task");
+            } else {
+                filterChain.doFilter(servletRequest, servletResponse);
             }
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
-        filterChain.doFilter(request, response);
+
     }
 }

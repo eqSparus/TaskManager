@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                 cookie.setHttpOnly(true);
                 response.addCookie(cookie);
                 response.setStatus(HttpServletResponse.SC_OK);
-                resp.put("html", "http://localhost:8080/main");
+                resp.put("html", "http://localhost:8080/task");
             } else {
                 response.setStatus(HttpServletResponse.SC_CONFLICT);
                 resp.put("message", "Incorrect login or password!");

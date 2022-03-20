@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/main", name = "MainServlet")
-public class MainServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/task", name = "MainServlet")
+public class TaskServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/page/main.html").forward(request, response);
+        request.getRequestDispatcher("/page/task.html").forward(request, response);
     }
 
 }

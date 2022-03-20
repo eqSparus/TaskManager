@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+
+    <link href="../css/style.css" type="text/css" rel="stylesheet">
+    <link href="../css/reset.css" type="text/css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:ital@0;1&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+</head>
+<body class="back">
+
+<nav class="nav navbar-expand navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav me-auto">
+                <a class="navbar-brand fs-2" href="/main">Task Manager</a>
+
+            </div>
+            <div class="d-flex">
+                <a class="btn btn-danger me-3" href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+</nav>
+
+<div class="container-fluid">
+
+    <div class="task_container">
+
+        <div class="mt-5">
+
+            <div class="btn_container">
+                <input type="button" class="btn btn-primary fs-4 text-dark mt-3" data-bs-toggle="modal"
+                       data-bs-target="#exampleModalToggle" value="Add task">
+
+                <input type="button" class="btn btn-success fs-4 mt-3 text-dark" value="Active" id="btn_task_active">
+
+                <input type="button" class="btn btn-warning fs-4 mt-3 text-dark" value="Done" id="btn_task_done">
+
+                <input type="button" class="btn btn-info fs-4 mt-3 text-dark" value="Frozen" id="btn_task_frozen">
+
+                <input type="button" class="btn btn-danger fs-4 mt-3 text-dark" value="Failed" id="btn_task_failed">
+            </div>
+
+        </div>
+
+        <div id="block_task">
+            <div class="mx-5 mt-3 fs-3 show" id="task_active">
+                <div class="text-success text-center">Active</div>
+                <div class="alert alert-success field field_container">
+
+                    <table class="table table-success table-striped">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Date start</th>
+                            <th>Date end</th>
+                            <th>Done Task</th>
+                            <th>Update Task</th>
+                            <th>Frozen Task</th>
+                            <th>Delete Task</th>
+                        </tr>
+                        </thead>
+                        <tbody id="field_active">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="mx-5 mt-3 fs-3 none" id="task_done">
+                <div class="text-warning text-center">Done</div>
+                <div class="alert alert-warning field field_container">
+
+                    <table class="table table-warning table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date start</th>
+                            <th scope="col">Date end</th>
+                            <th scope="col">Delete Task</th>
+                        </tr>
+                        </thead>
+                        <tbody id="field_done">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="mx-5 mt-3 fs-3 none" id="task_frozen">
+                <div class="text-info text-center">Frozen</div>
+                <div class="alert alert-info field field_container">
+
+                    <table class="table table-info table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date start</th>
+                            <th scope="col">Date end</th>
+                            <th scope="col">Active Task</th>
+                            <th scope="col">Update Task</th>
+                            <th scope="col">Delete Task</th>
+                        </tr>
+                        </thead>
+                        <tbody id="field_frozen">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="mx-5 mt-3 fs-3 none" id="task_failed">
+                <div class="text-danger text-center">Failed</div>
+                <div class="alert alert-danger field field_container">
+
+                    <table class="table table-danger table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date start</th>
+                            <th scope="col">Date end</th>
+                            <th scope="col">Delete Task</th>
+                        </tr>
+                        </thead>
+                        <tbody id="field_failed">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+         aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Add Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+
+                        <div id="message_error" class="text-center text-danger">
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title" placeholder="Title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" placeholder="Description"></textarea>
+                        </div>
+                        <div>
+                            <label for="create_at" class="col-form-label">The date of the beginning:</label>
+                            <input type="date" class="form-control" id="create_at">
+                        </div>
+                        <div>
+                            <label for="completion_at" class="col-form-label">End date:</label>
+                            <input type="date" class="form-control" id="completion_at">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btn_add" data-bs-dismiss="modal">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/task.js" type="module"></script>
+
+</body>
+</html>
