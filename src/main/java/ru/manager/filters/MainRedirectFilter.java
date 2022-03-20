@@ -15,7 +15,7 @@ import java.util.Arrays;
  * Фильтр для запрета посещения страниц.
  * не авторизованым пользователям.
  */
-@WebFilter(urlPatterns = {"/main", "/task/*"})
+@WebFilter(urlPatterns = {"/task", "/task/*"})
 public class MainRedirectFilter implements Filter {
 
     private IUserDao dao;
