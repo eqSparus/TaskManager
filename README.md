@@ -50,6 +50,6 @@ __App Features__
 
 - Server API
 - Jackson
-- maven
+- Maven
 - PostgreSQL
 - Bootstrap 5
