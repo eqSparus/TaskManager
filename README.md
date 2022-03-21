@@ -49,7 +49,7 @@ __App Features__
 ## Technology
 
 - Server API
--Jackson
+- Jackson
 - maven
 - PostgreSQL
 - Bootstrap 5
