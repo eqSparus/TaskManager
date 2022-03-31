@@ -1,4 +1,4 @@
-package ru.manager.services;
+package ru.manager.services.crypt;
 
 /**
  * Интерфейс для шифрования пароля пользователя.
