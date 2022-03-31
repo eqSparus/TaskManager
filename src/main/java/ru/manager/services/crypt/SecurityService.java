@@ -1,4 +1,4 @@
-package ru.manager.services.crypt;
+package ru.manager.services;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
